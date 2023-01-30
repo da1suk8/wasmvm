@@ -254,7 +254,19 @@ impl BackendApi for GoApi {
             Err(e) => return (Err(BackendError::unknown(e.to_string())), gas_info),
         };
         callee_instance.env.set_serialized_env(&contract_env);
-        callee_instance.set_storage_readonly(caller_env.is_storage_readonly());
+        let func_name = &func_info.name;
+        if caller_env.is_storage_readonly() {
+            // if caller_env.is_storage_readonly() is true, funtion of dynamic linked caller has read-only permission
+            callee_instance.set_storage_readonly(caller_env.is_storage_readonly());
+        } else {
+            if func_name.starts_with("read-write-") {
+                // func_name starts with "read-", so funtion of dynamic linked caller has read-write permission
+                callee_instance.set_storage_readonly(caller_env.is_storage_readonly());
+            } else {
+                // func_name starts with "read-", so funtion of dynamic linked caller has read-only permission
+                callee_instance.set_storage_readonly(true);
+            }
+        }
         gas_info.cost += instantiate_cost;
 
         // check callstack
