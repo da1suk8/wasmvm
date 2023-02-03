@@ -254,7 +254,26 @@ impl BackendApi for GoApi {
             Err(e) => return (Err(BackendError::unknown(e.to_string())), gas_info),
         };
         callee_instance.env.set_serialized_env(&contract_env);
-        callee_instance.set_storage_readonly(caller_env.is_storage_readonly());
+        let mut is_callee_func_read_only: bool = false;
+        let module = match cache.get_module(&checksum) {
+            Ok(module) => module,
+            Err(_) => return (Err(BackendError::unknown("cannot get module")), gas_info),
+        };
+        for func_name in module
+            .exports()
+            .filter(|module_name| module_name.name().ends_with(&func_info.name))
+        {
+            is_callee_func_read_only =
+                is_callee_func_read_only || func_name.name().starts_with("__attr_read_only");
+        }
+        if caller_env.is_storage_readonly() {
+            // if caller_env.is_storage_readonly() is true, funtion of dynamic linked caller has read-only permission.
+            callee_instance.set_storage_readonly(caller_env.is_storage_readonly());
+        } else {
+            // if caller_env.is_storage_readonly() is false, funtion of dynamic linked caller has read-write permission
+            // then, read-only and read-write are determined by the function of callee
+            callee_instance.set_storage_readonly(is_callee_func_read_only);
+        }
         gas_info.cost += instantiate_cost;
 
         // check callstack
