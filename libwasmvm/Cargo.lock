@@ -202,7 +202,6 @@ checksum = "6245d59a3e82a7fc217c5828a6692dbc6dfb63a0c8c90495621f7b9d79704a0e"
 [[package]]
 name = "cosmwasm-crypto"
 version = "1.0.0-0.6.0"
-source = "git+https://github.com/line/cosmwasm?rev=324f59e22bbfc210333eea0d34ea65c92d8b0b8e#324f59e22bbfc210333eea0d34ea65c92d8b0b8e"
 dependencies = [
  "digest",
  "ed25519-zebra",
@@ -215,7 +214,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-derive"
 version = "1.0.0-0.6.0"
-source = "git+https://github.com/line/cosmwasm?rev=324f59e22bbfc210333eea0d34ea65c92d8b0b8e#324f59e22bbfc210333eea0d34ea65c92d8b0b8e"
 dependencies = [
  "convert_case",
  "proc-macro-error",
@@ -227,7 +225,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-std"
 version = "1.0.0-0.6.0"
-source = "git+https://github.com/line/cosmwasm?rev=324f59e22bbfc210333eea0d34ea65c92d8b0b8e#324f59e22bbfc210333eea0d34ea65c92d8b0b8e"
 dependencies = [
  "base64",
  "cosmwasm-crypto",
@@ -245,7 +242,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-vm"
 version = "1.0.0-0.6.0"
-source = "git+https://github.com/line/cosmwasm?rev=324f59e22bbfc210333eea0d34ea65c92d8b0b8e#324f59e22bbfc210333eea0d34ea65c92d8b0b8e"
 dependencies = [
  "clru",
  "cosmwasm-crypto",
@@ -1271,9 +1267,9 @@ dependencies = [
 
 [[package]]
 name = "serde"
-version = "1.0.132"
+version = "1.0.103"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b9875c23cf305cd1fd7eb77234cbb705f21ea6a72c637a5c6db5fe4b8e7f008"
+checksum = "1217f97ab8e8904b57dd22eb61cde455fa7446a9c1cf43966066da047c1f3702"
 dependencies = [
  "serde_derive",
 ]
@@ -1298,9 +1294,9 @@ dependencies = [
 
 [[package]]
 name = "serde_derive"
-version = "1.0.132"
+version = "1.0.103"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ecc0db5cb2556c0e558887d9bbdcf6ac4471e83ff66cf696e5419024d1606276"
+checksum = "a8c6faef9a2e64b0064f48570289b4bf8823b7581f1d6157c1b52152306651d0"
 dependencies = [
  "proc-macro2",
  "quote",
